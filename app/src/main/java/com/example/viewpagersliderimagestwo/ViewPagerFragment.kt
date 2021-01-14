@@ -17,6 +17,9 @@ class ViewPagerFragment : Fragment() {
     lateinit var fragmentView: View
     lateinit var pageTitles: Array<String>
     lateinit var drawableList: Array<Int>
+    lateinit var fragmentList: ArrayList<Fragment>
+    lateinit var adapter: SliderAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,15 +31,25 @@ class ViewPagerFragment : Fragment() {
         pageTitles = resources.getStringArray(R.array.fragmentTitles)
         drawableList = getResourceIdArray(resources.obtainTypedArray(R.array.drawableList))
 
-
-        val fragmentList = createFragmentList()
-
-        val adapter = SliderAdapter(
-                fragmentList,
-                requireActivity().supportFragmentManager,
-                lifecycle
+        adapter = SliderAdapter(
+                this
         )
+        adapter.addFragment(MainPageFragment.newInstance(
+                FragmentData(
+                        pageTitles[currentPosition],
+                        drawableList[currentPosition])
+        ))
 
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                if (position + 1 < pageTitles.size && currentPosition < position + 1) {
+                    currentPosition = position + 1
+                    val data = FragmentData(pageTitles[currentPosition], drawableList[currentPosition])
+                    adapter.addFragment(MainPageFragment.newInstance(data))
+                }
+            }
+        })
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.itemCount
         viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
@@ -48,7 +61,9 @@ class ViewPagerFragment : Fragment() {
         return fragmentView
     }
 
-    class CrossfadePageTransformer : ViewPager2.PageTransformer {
+    class CrossfadePageTransformer() : ViewPager2.PageTransformer {
+
+
         override fun transformPage(view: View, position: Float) {
             val pageWidth = view.width
             val imageView: View = view.findViewById(R.id.image_view)
@@ -69,16 +84,6 @@ class ViewPagerFragment : Fragment() {
         }
     }
 
-    fun createFragmentList(): ArrayList<Fragment> {
-        val fList: ArrayList<Fragment> = arrayListOf()
-        val fragmentCount = resources.getStringArray(R.array.fragmentTitles).lastIndex
-        for (i in 0..fragmentCount) {
-            val data = FragmentData(pageTitles[i], drawableList[i])
-            fList.add(MainPageFragment.newInstance(data))
-        }
-        return fList
-    }
-
     fun getResourceIdArray(typedArray: TypedArray): Array<Int> {
         val arr: Array<Int> = Array(typedArray.length()) { -1 }
         for (i in 0 until typedArray.length()) {
@@ -87,6 +92,9 @@ class ViewPagerFragment : Fragment() {
         return arr
     }
 
+    companion object {
+        private var currentPosition = 0
+    }
 }
 
 

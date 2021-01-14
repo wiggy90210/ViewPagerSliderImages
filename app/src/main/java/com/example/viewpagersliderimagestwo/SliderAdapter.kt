@@ -1,19 +1,21 @@
 package com.example.viewpagersliderimagestwo
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class SliderAdapter(
-        list: ArrayList<Fragment>,
-        fm: FragmentManager,
-        lifecycle: Lifecycle
-) : FragmentStateAdapter(fm, lifecycle) {
+        fragment: Fragment
+) : FragmentStateAdapter(fragment) {
 
-    private var fragmentItems: ArrayList<Fragment> = list
+    private var fragmentItems: ArrayList<Fragment> = arrayListOf()
 
     override fun getItemCount() = fragmentItems.size
-    override fun createFragment(position: Int) = fragmentItems[position]
+    override fun createFragment(position: Int): Fragment {
+        return fragmentItems[position]
+    }
 
+    fun addFragment(fragment: Fragment) {
+        fragmentItems.add(fragment)
+        notifyDataSetChanged()
+    }
 }
