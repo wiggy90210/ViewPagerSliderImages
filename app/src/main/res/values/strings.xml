@@ -4,4 +4,60 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+    <string-array name="fragmentTitles">
+        <item>Top of the mountain</item>
+        <item>River in the forest</item>
+        <item>Clouds above mountains</item>
+        <item>Sands of the desert</item>
+        <item>Cottage in the tundra</item>
+        <item>Frozen lake in the mountains</item>
+        <item>Island in the ocean</item>
+        <item>Clouds arroud the mountain</item>
+        <item>Trip along the coast</item>
+        <item>Road between the hills</item>
+        <item>Palm trees at sunset</item>
+        <item>City in the evening</item>
+        <item>Road along the coast</item>
+        <item>Sky at night</item>
+        <item>Dive in the sea</item>
+        <item>Single island in the sea</item>
+        <item>Night city</item>
+        <item>Falling star</item>
+        <item>Fireworks in the night sky</item>
+        <item>Golden Gate in daylight</item>
+        <item>Cable car over the forest</item>
+        <item>Waves in the sea</item>
+        <item>Sunset over the island</item>
+
+
+    </string-array>
+
+    <array name="drawableList">
+        <item>@drawable/a1</item>
+        <item>@drawable/a2</item>
+        <item>@drawable/a3</item>
+        <item>@drawable/a4</item>
+        <item>@drawable/a5</item>
+        <item>@drawable/a6</item>
+        <item>@drawable/a7</item>
+        <item>@drawable/a8</item>
+        <item>@drawable/a9</item>
+        <item>@drawable/a10</item>
+        <item>@drawable/a11</item>
+        <item>@drawable/a12</item>
+        <item>@drawable/a13</item>
+        <item>@drawable/a14</item>
+        <item>@drawable/a15</item>
+        <item>@drawable/a16</item>
+        <item>@drawable/a17</item>
+        <item>@drawable/a18</item>
+        <item>@drawable/a19</item>
+        <item>@drawable/a20</item>
+        <item>@drawable/a21</item>
+        <item>@drawable/a22</item>
+        <item>@drawable/a23</item>
+    </array>
 </resources>

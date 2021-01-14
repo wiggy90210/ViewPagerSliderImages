@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.viewpagersliderimagestwo.fragments.*
@@ -22,29 +23,12 @@ class ViewPagerFragment : Fragment() {
         fragmentView =  inflater.inflate(R.layout.fragment_view_pager, container, false)
         val viewPager: ViewPager2 = fragmentView.findViewById(R.id.viewpager)
         val indicator3: CircleIndicator3 = fragmentView.findViewById(R.id.indicator)
-
-        val fragmentList = arrayListOf(
-                PageFragment(),
-                Page2Fragment(),
-                Page3Fragment(),
-                Page4Fragment(),
-                Page5Fragment(),
-                Page6Fragment(),
-                Page7Fragment(),
-                Page8Fragment(),
-                Page9Fragment(),
-                Page10Fragment(),
-                Page11Fragment(),
-                Page12Fragment(),
-                Page13Fragment(),
-                Page14Fragment(),
-                Page15Fragment(),
-        )
+        val fragmentList = createFragmentList()
 
         val adapter = SliderAdapter(
-            fragmentList,
-            requireActivity().supportFragmentManager,
-            lifecycle
+                fragmentList,
+                requireActivity().supportFragmentManager,
+                lifecycle
         )
 
         viewPager.adapter = adapter
@@ -77,6 +61,15 @@ class ViewPagerFragment : Fragment() {
                 } else -> {}
             }
         }
+    }
+
+    fun createFragmentList(): ArrayList<Fragment> {
+        val fList: ArrayList<Fragment> = arrayListOf()
+        val fragmentCount = resources.getStringArray(R.array.fragmentTitles).lastIndex
+        for (i in 0..fragmentCount) {
+            fList.add(MainPageFragment.newInstance(i))
+        }
+        return fList
     }
 
 }
