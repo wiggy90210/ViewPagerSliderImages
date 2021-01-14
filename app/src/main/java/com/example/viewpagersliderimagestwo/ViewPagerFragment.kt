@@ -26,7 +26,7 @@ class ViewPagerFragment : Fragment() {
         val viewPager: ViewPager2 = fragmentView.findViewById(R.id.viewpager)
         val indicator3: CircleIndicator3 = fragmentView.findViewById(R.id.indicator)
         pageTitles = resources.getStringArray(R.array.fragmentTitles)
-        drawableList = getArray(resources.obtainTypedArray(R.array.drawableList))
+        drawableList = getResourceIdArray(resources.obtainTypedArray(R.array.drawableList))
 
 
         val fragmentList = createFragmentList()
@@ -79,7 +79,7 @@ class ViewPagerFragment : Fragment() {
         return fList
     }
 
-    fun getArray(typedArray: TypedArray): Array<Int> {
+    fun getResourceIdArray(typedArray: TypedArray): Array<Int> {
         val arr: Array<Int> = Array(typedArray.length()) { -1 }
         for (i in 0 until typedArray.length()) {
             arr[i] = (typedArray.getResourceId(i, -1))
