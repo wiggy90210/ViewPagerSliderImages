@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:text="Clouds arroud the mountains"
+        android:text="Clouds arroud the mountain"
         android:gravity="center"
         android:textColor="@color/white"
         android:textSize="30sp"

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.viewpagersliderimagestwo.fragments.*
 import me.relex.circleindicator.CircleIndicator3
@@ -30,7 +31,14 @@ class ViewPagerFragment : Fragment() {
                 Page5Fragment(),
                 Page6Fragment(),
                 Page7Fragment(),
-                Page8Fragment()
+                Page8Fragment(),
+                Page9Fragment(),
+                Page10Fragment(),
+                Page11Fragment(),
+                Page12Fragment(),
+                Page13Fragment(),
+                Page14Fragment(),
+                Page15Fragment(),
         )
 
         val adapter = SliderAdapter(
@@ -41,6 +49,7 @@ class ViewPagerFragment : Fragment() {
 
         viewPager.adapter = adapter
         viewPager.offscreenPageLimit = adapter.itemCount
+        viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         viewPager.setPageTransformer(CrossfadePageTransformer())
         indicator3.setViewPager(viewPager)
         adapter.registerAdapterDataObserver(indicator3.adapterDataObserver)
