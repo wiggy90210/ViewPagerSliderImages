@@ -9,8 +9,7 @@ data class FragmentData(
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString(),
-            parcel.readInt()) {
-    }
+            parcel.readInt()) 
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)
@@ -30,6 +29,4 @@ data class FragmentData(
             return arrayOfNulls(size)
         }
     }
-
-
 }
