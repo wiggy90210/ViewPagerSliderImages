@@ -23,11 +23,14 @@ class ViewPagerFragment : Fragment() {
         val indicator3: CircleIndicator3 = fragmentView.findViewById(R.id.indicator)
 
         val fragmentList = arrayListOf(
-            PageFragment(),
-            Page2Fragment(),
-            Page3Fragment(),
-            Page4Fragment(),
-            Page5Fragment(),
+                PageFragment(),
+                Page2Fragment(),
+                Page3Fragment(),
+                Page4Fragment(),
+                Page5Fragment(),
+                Page6Fragment(),
+                Page7Fragment(),
+                Page8Fragment()
         )
 
         val adapter = SliderAdapter(
