@@ -28,19 +28,20 @@ class ViewPagerFragment : Fragment() {
         fragmentView =  inflater.inflate(R.layout.fragment_view_pager, container, false)
         val viewPager: ViewPager2 = fragmentView.findViewById(R.id.viewpager)
         val indicator3: CircleIndicator3 = fragmentView.findViewById(R.id.indicator)
-        pageTitles = resources.getStringArray(R.array.fragmentTitles)
-        drawableList = getResourceIdArray(resources.obtainTypedArray(R.array.drawableList))
+        val pageNum = resources.getStringArray(R.array.fragmentTitles).size
+        //drawableList = getResourceIdArray(resources.obtainTypedArray(R.array.drawableList))
 
         adapter = SliderAdapter(
+                pageNum,
                 this
         )
-        adapter.addFragment(MainPageFragment.newInstance(
-                FragmentData(
-                        pageTitles[currentPosition],
-                        drawableList[currentPosition])
-        ))
+//        adapter.addFragment(MainPageFragment.newInstance(
+//                FragmentData(
+//                        pageTitles[currentPosition],
+//                        drawableList[currentPosition])
+//        ))
 
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        /*viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 if (position + 1 < pageTitles.size && currentPosition < position + 1) {
@@ -49,9 +50,9 @@ class ViewPagerFragment : Fragment() {
                     adapter.addFragment(MainPageFragment.newInstance(data))
                 }
             }
-        })
+        })*/
         viewPager.adapter = adapter
-        viewPager.offscreenPageLimit = adapter.itemCount
+        viewPager.offscreenPageLimit = 5
         viewPager.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
         viewPager.setPageTransformer(CrossfadePageTransformer())
         indicator3.setViewPager(viewPager)
@@ -84,17 +85,14 @@ class ViewPagerFragment : Fragment() {
         }
     }
 
-    fun getResourceIdArray(typedArray: TypedArray): Array<Int> {
-        val arr: Array<Int> = Array(typedArray.length()) { -1 }
-        for (i in 0 until typedArray.length()) {
-            arr[i] = (typedArray.getResourceId(i, -1))
-        }
-        return arr
-    }
-
-    companion object {
-        private var currentPosition = 0
-    }
+//    fun getResourceIdArray(typedArray: TypedArray): Array<Int> {
+//        val arr: Array<Int> = Array(typedArray.length()) { -1 }
+//        for (i in 0 until typedArray.length()) {
+//            arr[i] = (typedArray.getResourceId(i, -1))
+//        }
+//        return arr
+//    }
+    
 }
 
 
