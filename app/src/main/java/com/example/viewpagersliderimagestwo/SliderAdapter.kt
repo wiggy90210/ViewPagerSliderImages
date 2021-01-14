@@ -2,10 +2,8 @@ package com.example.viewpagersliderimagestwo
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.viewpagersliderimagestwo.fragments.MainPageFragment
 
 class SliderAdapter(
         list: ArrayList<Fragment>,

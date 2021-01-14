@@ -1,11 +1,11 @@
 package com.example.viewpagersliderimagestwo
 
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.viewpagersliderimagestwo.fragments.*
@@ -15,6 +15,8 @@ import me.relex.circleindicator.CircleIndicator3
 class ViewPagerFragment : Fragment() {
 
     lateinit var fragmentView: View
+    lateinit var pageTitles: Array<String>
+    lateinit var drawableList: Array<Int>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +25,10 @@ class ViewPagerFragment : Fragment() {
         fragmentView =  inflater.inflate(R.layout.fragment_view_pager, container, false)
         val viewPager: ViewPager2 = fragmentView.findViewById(R.id.viewpager)
         val indicator3: CircleIndicator3 = fragmentView.findViewById(R.id.indicator)
+        pageTitles = resources.getStringArray(R.array.fragmentTitles)
+        drawableList = getArray(resources.obtainTypedArray(R.array.drawableList))
+
+
         val fragmentList = createFragmentList()
 
         val adapter = SliderAdapter(
@@ -67,9 +73,18 @@ class ViewPagerFragment : Fragment() {
         val fList: ArrayList<Fragment> = arrayListOf()
         val fragmentCount = resources.getStringArray(R.array.fragmentTitles).lastIndex
         for (i in 0..fragmentCount) {
-            fList.add(MainPageFragment.newInstance(i))
+            val data = FragmentData(pageTitles[i], drawableList[i])
+            fList.add(MainPageFragment.newInstance(data))
         }
         return fList
+    }
+
+    fun getArray(typedArray: TypedArray): Array<Int> {
+        val arr: Array<Int> = Array(typedArray.length()) { -1 }
+        for (i in 0 until typedArray.length()) {
+            arr[i] = (typedArray.getResourceId(i, -1))
+        }
+        return arr
     }
 
 }

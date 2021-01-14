@@ -1,29 +1,23 @@
 package com.example.viewpagersliderimagestwo.fragments
 
-import android.content.res.TypedArray
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.viewpagersliderimagestwo.R
 
 class MainPageFragment : Fragment() {
 
-    lateinit var pageTitles: Array<String>
-    lateinit var drawableList: TypedArray
-
-
+    var data: FragmentData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        position = arguments?.getInt(POSITION)
-
-        pageTitles = resources.getStringArray(R.array.fragmentTitles)
-        drawableList = resources.obtainTypedArray(R.array.drawableList)
+        data = arguments?.getParcelable<FragmentData>(BUNDLE_DATA)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,22 +26,20 @@ class MainPageFragment : Fragment() {
         val tvTitle: TextView = view.findViewById(R.id.fragment_text)
         val ivBackground: ImageView = view.findViewById(R.id.image_view)
 
-        position?.let {
-            tvTitle.text = pageTitles[position!!]
-            ivBackground.setImageDrawable(drawableList.getDrawable(position!!))
+        data?.let {
+            tvTitle.text = it.title
+            ivBackground.setImageDrawable(ContextCompat.getDrawable(requireContext(), it.drawable))
         }
         return view
     }
 
-
     companion object {
-        const val POSITION = "position"
-        var position: Int? = null
+        const val BUNDLE_DATA = "data"
 
-        fun newInstance(position: Int): MainPageFragment {
+        fun newInstance(data: FragmentData): MainPageFragment {
             val fragment = MainPageFragment()
             val b = Bundle()
-            b.putInt(POSITION, position)
+            b.putParcelable(BUNDLE_DATA, data)
             fragment.arguments = b
             return fragment
         }
